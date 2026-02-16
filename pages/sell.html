@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Car - AutoLine</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .sell-section {
+            padding: 4rem 0;
+        }
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+        .tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #6b7280;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s ease;
+        }
+        .tab:hover {
+            color: #2563eb;
+        }
+        .tab.active {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+            font-weight: 600;
+        }
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .ad-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .ad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .ad-card-content {
+            padding: 1.5rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status-approved {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="logo">AutoLine</div>
+    <input type="checkbox" id="menu-toggle">
+    <label class="hamburger" for="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <nav class="menu">
+      <a href="../index.html">Home</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="cart.html">Cart</a>
+      <a href="purchases.html">Purchases</a>
+      <a class="active" href="sell.html">List Your Car</a>
+      <div class="user-menu" id="user-menu" style="display: none;">
+        <div class="user-avatar" id="user-initial"></div>
+        <span id="user-name"></span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="sell-section">
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" onclick="showCreateForm()" id="create-tab">Create Ad</button>
+            <button class="tab" onclick="showMyAds()" id="my-ads-tab">My Ads</button>
+        </div>
+
+        <div id="create-section">
+            <div class="form-container">
+                <h2 style="margin-bottom: 2rem;">Create New Ad</h2>
+                <form id="create-ad-form">
+                    <div class="form-grid">
+                        <label>Car Brand<input class="input" id="ad-make" type="text" required></label>
+                        <label>Model<input class="input" id="ad-model" type="text" required></label>
+                        <label>Year<input class="input" id="ad-year" type="number" required min="1900" max="2024"></label>
+                        <label>Price (₸)<input class="input" id="ad-price" type="number" required min="0"></label>
+                        <label>Mileage<input class="input" id="ad-mileage" type="number" required min="0"></label>
+                        <label>Color<input class="input" id="ad-color" type="text" required></label>
+                    </div>
+                    <label style="display: block; margin-top: 1rem;">Description
+                        <textarea class="input" id="ad-description" rows="4" required style="width: 100%; resize: vertical;"></textarea>
+                    </label>
+                    <label style="display: block; margin-top: 1rem;">Car Image
+                        <input class="input" id="ad-image" type="file" accept="image/*" required>
+                        <small style="color: #6b7280; font-size: 0.875rem;">Select a car image from your device</small>
+                    </label>
+                    <div id="image-preview" style="margin-top: 1rem; display: none;">
+                        <img id="preview-img" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 5px; border: 2px solid #e5e7eb;">
+                    </div>
+                    <button class="btn primary" type="submit" style="width: 100%; margin-top: 1rem;">Submit for Approval</button>
+                </form>
+                <div id="create-success" style="margin-top: 1rem; padding: 0.75rem; background: #dcfce7; color: #166534; border-radius: 5px; display: none;"></div>
+                <div id="create-error" style="margin-top: 1rem; padding: 0.75rem; background: #fee; color: #c33; border-radius: 5px; display: none;"></div>
+            </div>
+        </div>
+
+        <div id="my-ads-section" style="display: none;">
+            <h2 style="margin-bottom: 2rem;">My Ads</h2>
+            <div class="ads-grid" id="my-ads-grid"></div>
+            <div id="no-ads" style="text-align: center; padding: 3rem; color: #6b7280; display: none;">
+                <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">You don't have any ads created yet</p>
+                <p style="font-size: 1rem; color: #9ca3af;">Create the first ad by switching to the tab "Create Ad"</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="edit-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div style="background: white; padding: 2rem; border-radius: 10px; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto;">
+        <h3 style="margin-bottom: 1.5rem;">Edit Ad</h3>
+        <form id="edit-ad-form">
+            <input type="hidden" id="edit-ad-id">
+            <div class="form-grid">
+                <label>Car Brand<input class="input" id="edit-make" type="text" required></label>
+                <label>Model<input class="input" id="edit-model" type="text" required></label>
+                <label>Year<input class="input" id="edit-year" type="number" required></label>
+                <label>Price (₸)<input class="input" id="edit-price" type="number" required></label>
+                <label>Mileage<input class="input" id="edit-mileage" type="number" required></label>
+                <label>Color<input class="input" id="edit-color" type="text" required></label>
+            </div>
+            <label style="display: block; margin-top: 1rem;">Description
+                <textarea class="input" id="edit-description" rows="4" required style="width: 100%; resize: vertical;"></textarea>
+            </label>
+            <label style="display: block; margin-top: 1rem;">Car Image
+                <input class="input" id="edit-image" type="file" accept="image/*">
+                <small style="color: #6b7280; font-size: 0.875rem;">Select a new image or keep the current one</small>
+            </label>
+            <div id="edit-image-preview" style="margin-top: 1rem; display: none;">
+                <img id="edit-preview-img" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 5px; border: 2px solid #e5e7eb;">
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <button class="btn primary" type="submit" style="flex: 1;">Update</button>
+                <button class="btn" type="button" onclick="closeEditModal()" style="flex: 1; background: #e5e7eb; color: #374151;">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer class="footer">
+  <div class="f-cols">
+    <div class="f-col">
+      <h4>AutoLine</h4>
+      <p>Sale and selection of cars. Quality guarantee and transparent prices.</p>
+    </div>
+    <div class="f-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="purchases.html">Purchases</a></li>
+        <li><a href="sell.html">List Your Car</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contacts</h4>
+      <ul>
+        <li>+7 (700) 000-00-00</li>
+        <li>info@autoline.kz</li>
+        <li><a href="https://2gis.kz/almaty/geo/9430047375072339">Almaty, Abay 10</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">© 2025 AutoLine. All rights reserved.</div>
+</footer>
+
+<script src="../js/sell.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderator Panel - AutoLine</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .moderator-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.4) 100%),
+                        url('../img/modercar.jpg') center/cover no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            position: relative;
+            min-height: 300px;
+        }
+        .moderator-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .moderator-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .moderator-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .search-section {
+            padding: 2rem 0;
+            background: #f9fafb;
+        }
+        .search-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .search-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        .search-btn {
+            padding: 0.75rem 2rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .search-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        
+        .search-results-section {
+            padding: 2rem 0;
+            background: #f3f4f6;
+            display: none;
+        }
+        .search-results-section.active {
+            display: block;
+        }
+        .search-results-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .search-results-header {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .search-results-header h3 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .search-query {
+            color: #2563eb;
+            font-weight: 600;
+        }
+        .search-results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .status-board {
+            padding: 3rem 0;
+            background: #f9fafb;
+        }
+        .board-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .status-section {
+            margin-bottom: 3rem;
+        }
+        
+        .status-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 3px solid;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .pending-section .status-section-header {
+            border-color: #f59e0b;
+        }
+        .approved-section .status-section-header {
+            border-color: #10b981;
+        }
+        .rejected-section .status-section-header {
+            border-color: #ef4444;
+        }
+        
+        .status-section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .pending-section .status-section-title {
+            color: #f59e0b;
+        }
+        .approved-section .status-section-title {
+            color: #10b981;
+        }
+        .rejected-section .status-section-title {
+            color: #ef4444;
+        }
+        
+        .status-section-title .icon {
+            font-size: 1.75rem;
+        }
+        
+        .status-count {
+            background: #f3f4f6;
+            color: #4b5563;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .status-cards-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .status-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .status-card {
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .status-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-color: #cbd5e1;
+        }
+        
+        .status-card-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: #f3f4f6;
+        }
+        
+        .status-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .no-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        
+        .status-card-content {
+            padding: 1rem;
+        }
+        
+        .status-card-content h4 {
+            color: #1f2937;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .ad-id {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            font-family: monospace;
+            margin-bottom: 0.5rem;
+        }
+        
+        .car-info {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .car-details {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .owner-info {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .status-card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0 1rem 1rem 1rem;
+        }
+        
+        .action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 0.7rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        
+        .action-btn span {
+            font-size: 1.1rem;
+        }
+        
+        .approve-btn {
+            background: #10b981;
+            color: white;
+        }
+        .approve-btn:hover {
+            background: #059669;
+            transform: translateY(-1px);
+        }
+        
+        .reject-btn {
+            background: #ef4444;
+            color: white;
+        }
+        .reject-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #9ca3af;
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state-text {
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .status-cards-grid,
+            .search-results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="logo">AutoLine</div>
+    <input type="checkbox" id="menu-toggle">
+    <label class="hamburger" for="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <nav class="menu">
+      <a href="catalog.html">Catalog</a>
+      <a class="active" href="moderator.html">Moderator</a>
+      <div class="user-menu" id="user-menu" style="display: flex;">
+        <div class="user-avatar" id="user-initial"></div>
+        <span id="user-name"></span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="moderator-section">
+    <div class="moderator-header">
+        <h2>Moderator Panel</h2>
+        <p>Manage and moderate car listings</p>
+    </div>
+</section>
+
+<section class="search-section">
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="search-ads" placeholder="Search by ID, brand, model, year, price, color, or owner name...">
+            <button class="search-btn" onclick="performSearch()">Search</button>
+        </div>
+    </div>
+</section>
+
+<section class="search-results-section" id="search-results-section">
+    <div class="search-results-container">
+        <div class="search-results-header">
+            <h3>Search Results for: <span class="search-query" id="search-query-text"></span></h3>
+            <p id="search-results-count"></p>
+            <button class="search-btn" onclick="clearSearch()" style="margin-top: 1rem;">Clear Search</button>
+        </div>
+        <div class="search-results-grid" id="search-results-grid">
+        </div>
+    </div>
+</section>
+
+<section class="status-board">
+    <div class="board-container">
+        <div class="status-section pending-section">
+            <div class="status-section-header">
+                <div class="status-section-title">
+                    <span>Pending Approval</span>
+                </div>
+                <span class="status-count" id="pending-count">0</span>
+            </div>
+            <div class="status-cards-container">
+                <div class="status-cards-grid" id="pending-list">
+                    <div class="empty-state">
+                        <div class="empty-state-text">No pending ads</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-section approved-section">
+            <div class="status-section-header">
+                <div class="status-section-title">
+                    <span>Approved (In Catalog)</span>
+                </div>
+                <span class="status-count" id="approved-count">0</span>
+            </div>
+            <div class="status-cards-container">
+                <div class="status-cards-grid" id="approved-list">
+                    <div class="empty-state">
+                        <div class="empty-state-text">No approved ads</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-section rejected-section">
+            <div class="status-section-header">
+                <div class="status-section-title">
+                    <span>Rejected</span>
+                </div>
+                <span class="status-count" id="rejected-count">0</span>
+            </div>
+            <div class="status-cards-container">
+                <div class="status-cards-grid" id="rejected-list">
+                    <div class="empty-state">
+                        <div class="empty-state-text">No rejected ads</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+  <div class="f-cols">
+    <div class="f-col">
+      <h4>AutoLine</h4>
+      <p>Sale and selection of cars. Quality guarantee and transparent prices.</p>
+    </div>
+    <div class="f-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="moderator.html">Moderator</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contacts</h4>
+      <ul>
+        <li>+7 (700) 000-00-00</li>
+        <li>info@autoline.kz</li>
+        <li><a href="https://2gis.kz/almaty/geo/9430047375072339">Almaty, Abay 10</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">© 2025 AutoLine. All rights reserved.</div>
+</footer>
+
+<script src="../js/moderator.js"></script>
+</body>
+</html>

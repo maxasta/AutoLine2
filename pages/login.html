@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AutoLine</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-image: url('../img/first.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+        .header {
+            flex-shrink: 0;
+        }
+        .login-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            min-height: 0;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+        .login-card h2 {
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+        @media (max-width: 768px) {
+            body {
+                background-attachment: scroll;
+            }
+        }
+        .switch-form {
+            text-align: center;
+            margin-top: 1rem;
+            color: #6b7280;
+        }
+        .switch-form a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="logo">AutoLine</div>
+    <input type="checkbox" id="menu-toggle">
+  </div>
+</header>
+
+<section class="login-section">
+    <div class="login-card">
+        <div id="login-section">
+            <h2>Login</h2>
+            <form id="login-form" class="auth-form">
+                <label for="login-email">Email
+                    <input class="input" id="login-email" type="email" required>
+                </label>
+                <label for="login-password">Password
+                    <input class="input" id="login-password" type="password" required>
+                </label>
+                <button class="btn primary" type="submit">Login</button>
+            </form>
+            <div id="login-error" style="margin-top: 1rem; padding: 0.75rem; background: #fee; color: #c33; border-radius: 5px; display: none;"></div>
+            <div class="switch-form">
+                Don't have an account? <a href="#" onclick="showRegister(); return false;">Register</a>
+            </div>
+        </div>
+
+        <div id="register-section" style="display: none;">
+            <h2>Register</h2>
+            <form id="register-form" class="auth-form">
+                <label for="register-name">Name
+                    <input class="input" id="register-name" type="text" required>
+                </label>
+                <label for="register-email">Email
+                    <input class="input" id="register-email" type="email" required>
+                </label>
+                <label for="register-password">Password
+                    <input class="input" id="register-password" type="password" required>
+                </label>
+                <button class="btn primary" type="submit">Register</button>
+            </form>
+            <div id="register-error" style="margin-top: 1rem; padding: 0.75rem; background: #fee; color: #c33; border-radius: 5px; display: none;"></div>
+            <div class="switch-form">
+                Already have an account? <a href="#" onclick="showLogin(); return false;">Login</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="../js/login.js"></script>
+</body>
+</html>

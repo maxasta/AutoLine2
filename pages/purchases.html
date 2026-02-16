@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Purchases - AutoLine</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .purchases-section {
+            padding: 4rem 0;
+            background: #f9fafb;
+        }
+        .purchases-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .purchases-header h2 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        .purchases-header p {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+        .purchases-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .purchase-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .purchase-item img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .purchase-item h3 {
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+        .purchase-item p {
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        #no-purchases {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #6b7280;
+        }
+        #no-purchases .emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        #no-purchases p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="logo">AutoLine</div>
+    <input type="checkbox" id="menu-toggle">
+    <label class="hamburger" for="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <nav class="menu">
+      <a href="../index.html">Home</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="cart.html">Cart</a>
+      <a class="active" href="purchases.html">Purchases</a>
+      <a href="sell.html">List Your Car</a>
+      <div class="user-menu" id="user-menu" style="display: none;">
+        <div class="user-avatar" id="user-initial"></div>
+        <span id="user-name"></span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="purchases-section">
+    <div class="purchases-header">
+        <h2>My Purchases</h2>
+        <p>View your purchase history</p>
+    </div>
+    <div class="purchases-container">
+        <div id="purchases-list">
+        </div>
+        <div id="no-purchases" class="hidden" style="display: none;">
+            <p>You haven't made any purchases yet.</p>
+            <a href="catalog.html" class="btn primary">Browse Catalog</a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+  <div class="f-cols">
+    <div class="f-col">
+      <h4>AutoLine</h4>
+      <p>Sale and selection of cars. Quality guarantee and transparent prices.</p>
+    </div>
+    <div class="f-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="catalog.html">Catalog</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="purchases.html">Purchases</a></li>
+        <li><a href="sell.html">List Your Car</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contacts</h4>
+      <ul>
+        <li>+7 (700) 000-00-00</li>
+        <li>info@autoline.kz</li>
+        <li><a href="https://2gis.kz/almaty/geo/9430047375072339">Almaty, Abay 10</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">© 2025 AutoLine. All rights reserved.</div>
+</footer>
+
+<script src="../js/purchases.js"></script>
+</body>
+</html>
+
