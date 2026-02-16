@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page - AutoLine</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="logo">AutoLine</div>
+    <input type="checkbox" id="menu-toggle">
+    <label class="hamburger" for="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <nav class="menu">
+      <a class="active" href="index.html">Home</a>
+      <a href="pages/catalog.html">Catalog</a>
+      <a href="pages/cart.html">Cart</a>
+      <a href="pages/purchases.html">Purchases</a>
+      <a href="pages/sell.html">List Your Car</a>
+      <div class="user-menu" id="user-menu" style="display: none;">
+        <div class="user-avatar" id="user-initial"></div>
+        <span id="user-name"></span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('img/headcar.jpg'); background-size: cover; background-position: center;">
+  <div class="hero__content">
+    <div class="hero__text">
+      <h1>Find your <span>dream car today!</span></h1>
+      <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.95;">Welcome to AutoLine - Your trusted marketplace for buying and selling cars</p>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+    <h2>Customer Reviews</h2>
+    <div class="review-container">
+        <div class="review">
+            <img src="img/ivan.jpg" alt="Ivan Petrov" class="review-img" onerror="this.src='https://via.placeholder.com/80'">
+            <h4>Ivan Petrov</h4>
+            <p>Excellent service and a wide selection of cars. Bought a car here and was very satisfied!</p>
+        </div>
+        <div class="review">
+            <img src="img/anna.jpg" alt="Anna Smirnova" class="review-img" onerror="this.src='https://via.placeholder.com/80'">
+            <h4>Anna Smirnova</h4>
+            <p>Bought a car here and was very happy. Highly recommend!</p>
+        </div>
+        <div class="review">
+            <img src="img/alex.jpg" alt="Alex Johnson" class="review-img" onerror="this.src='https://via.placeholder.com/80'">
+            <h4>Alex Johnson</h4>
+            <p>Great customer support and transparent pricing. The whole process was smooth and fast!</p>
+        </div>
+        <div class="review">
+            <img src="img/maria.jpg" alt="Maria Volkova" class="review-img" onerror="this.src='https://via.placeholder.com/80'">
+            <h4>Maria Volkova</h4>
+            <p>Very friendly staff and good quality cars. Definitely will come back for my next purchase.</p>
+        </div>
+       <div class="review">
+            <img src="img/marcus.jpg" alt="Marcus Williams" class="review-img" onerror="this.src='https://via.placeholder.com/80'">
+            <h4>Marcus Williams</h4>
+            <p>Awesome deals and quick delivery. Love my new ride!</p>
+        </div>
+        <div class="review">
+            <img src="img/darya.jpg" alt="Darya Kim" class="review-img" onerror="this.src='https://via.placeholder.com/80'">
+            <h4>Darya Kim</h4>
+            <p>Helpful team and fair prices. Best car buying experience ever!</p>
+        </div>
+    </div>
+</section>
+
+<section class="about-us">
+  <h2>About Us</h2>
+  <p>We are <span>AutoLine</span>, a car selling company started in 2010. We help people find dream cars easily.</p>
+  <div class="timeline">
+    <div class="event">
+      <h3>2010: Founded</h3>
+      <p>Started with 5 cars in a small garage.</p>
+    </div>
+    <div class="event">
+      <h3>2015: Grew Big</h3>
+      <p>Opened 3 stores, sold 1000 cars.</p>
+    </div>
+    <div class="event">
+      <h3>2020: Online Shop</h3>
+      <p>Launched website, reached more people.</p>
+    </div>
+    <div class="event">
+      <h3>2025: Today</h3>
+      <p>Top seller with quality service and happy customers.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Ready to Drive?</h2>
+  <p>Find your dream car now. Contact us or view catalog!</p>
+  <a href="https://www.instagram.com/autoline.24/" class="btn">Contact Us</a>
+  <a href="pages/catalog.html" class="btn">View Catalog</a>
+</section>
+
+<section class="quick-facts">
+  <h2>Quick Facts</h2>
+<div class="facts-container">
+    <div class="fact">
+      <h3>15+ Years</h3>
+      <p>In business</p>
+    </div>
+    <div class="fact">
+      <h3>10000+ Cars Sold</h3>
+      <p>Happy customers</p>
+    </div>
+    <div class="fact">
+      <h3>Best Dealer Award 2024</h3>
+      <p>Top quality</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="f-cols">
+    <div class="f-col">
+      <h4>AutoLine</h4>
+      <p>Sale and selection of cars. Quality guarantee and transparent prices.</p>
+    </div>
+    <div class="f-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pages/catalog.html">Catalog</a></li>
+        <li><a href="pages/cart.html">Cart</a></li>
+        <li><a href="pages/purchases.html">Purchases</a></li>
+        <li><a href="pages/sell.html">List Your Car</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contacts</h4>
+      <ul>
+        <li>+7 (700) 000-00-00</li>
+        <li>info@autoline.kz</li>
+        <li><a href="https://2gis.kz/almaty/geo/9430047375072339">Almaty, Abay 10</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">© 2025 AutoLine. All rights reserved.</div>
+</footer>
+
+<script src="js/index.js"></script>
+</body>
+</html>

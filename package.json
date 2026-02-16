@@ -1,0 +1,17 @@
+{
+  "name": "autoline",
+  "version": "1.0.0",
+  "description": "AutoLine - Car marketplace",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["car", "marketplace", "autoline"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+
